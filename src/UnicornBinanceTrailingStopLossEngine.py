@@ -1,7 +1,6 @@
 from unicorn_binance_trailing_stop_loss.manager import BinanceTrailingStopLossManager
 import os
 
-
 class UnicornBinanceTrailingStopLossEngine:
     def __init__(self, API_KEY, API_SECRET, market):
         self.ubtsl = BinanceTrailingStopLossManager(callback_error=self.callback_error,

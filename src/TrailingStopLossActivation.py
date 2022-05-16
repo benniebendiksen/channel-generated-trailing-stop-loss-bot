@@ -9,6 +9,7 @@ class TrailingStopLossActivation:
                         filename=os.path.basename(__file__) + '.log',
                         format="{asctime} [{levelname:8}] {process} {thread} {module}: {message}",
                         style="{")
+
     def __init__(self):
         API_KEY = os.environ.get('API_KEY_2')
         API_SECRET = os.environ.get('API_SECRET_2')
