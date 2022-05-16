@@ -3,7 +3,6 @@ from binance.client import Client
 import logging
 import os
 
-
 class TrailingStopLossActivation:
     logging.getLogger("unicorn_binance_trailing_stop_loss.unicorn_binance_trailing_stop_loss_engine_manager")
     logging.basicConfig(level=logging.DEBUG,
