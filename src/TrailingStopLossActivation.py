@@ -34,7 +34,7 @@ class TrailingStopLossActivation(BaseClass):
         """
         Exit bot cycle
         :param exit_msg: This gets added to the stdout string
-        :param exit_code: Exit code for sys.exit() 0=success exit for bot cycle, 1=success exit for system, 2 to
+        :param exit_code: Exit code for sys.exit() 0=success exit for system, 1=success exit for bot cycle, 2 to
         255=anything else
         """
         self.stdout(f"Stopping ... please wait a few seconds!\n{exit_msg}", "CRITICAL")

@@ -20,3 +20,12 @@ conda activate trend_activated_algo_env
 
 ### Virtual Environment Creation
 You can alternatively create/load a Python virtual environment from the root directory:
+```
+$ python3 -m venv trend_activated_bot_env
+$ source trend_activated_bot_env/bin/activate
+```
+Having created this venv without a yml file, you will need to install the non-native libraries relied 
+upon by this project, found within the requirements.txt file:
+```
+$ python3 -m pip install -r requirements.txt
+```
