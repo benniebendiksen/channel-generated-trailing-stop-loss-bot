@@ -29,3 +29,10 @@ upon by this project, found within the requirements.txt file:
 ```
 $ python3 -m pip install -r requirements.txt
 ```
+
+## Execute
+```
+$ export API_KEY="aaa"
+$ export API_SECRET="bbb"
+$ ./main.py
+```
