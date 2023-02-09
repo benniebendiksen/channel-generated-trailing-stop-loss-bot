@@ -43,4 +43,4 @@ class TrailingStopLossActivation(BaseClass):
             self.engine.ubtsl.stop_manager()
             sys.exit(exit_code)
         except Exception as e:
-            self.stdout(f"Unknown Error in exit_all() - {e}", "CRITICAL", print_enabled=p_enable)
+            self.stdout(f"Unknown Error in exit_all() - {e}", "CRITICAL", print_enabled=True)
