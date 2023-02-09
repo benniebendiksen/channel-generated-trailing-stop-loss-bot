@@ -14,5 +14,5 @@ class TrailingStopLossActivation:
         API_KEY = os.environ.get('API_KEY_2')
         API_SECRET = os.environ.get('API_SECRET_2')
         self.client = Client(api_key=API_KEY, api_secret=API_SECRET)
-        self.engine = UnicornBinanceTrailingStopLossEngine(API_KEY, API_SECRET, "LUNABUSD")
+        self.engine = UnicornBinanceTrailingStopLossEngine(API_KEY, API_SECRET, "BTCUSD")
         self.engine.ubtsl.stop_manager()

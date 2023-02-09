@@ -2,7 +2,7 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.10 (unicorn-binance-trailing-stop-loss)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (trend_activated_algo_env)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

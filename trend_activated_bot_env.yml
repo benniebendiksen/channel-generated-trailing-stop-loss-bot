@@ -1,6 +1,11 @@
-name: unicorn-binance-trailing-stop-loss
+name: trend_activated_bot_env
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
 dependencies:
 - python>=3.7
+- pip
 - pip:
     - requests
     - ubtsl
