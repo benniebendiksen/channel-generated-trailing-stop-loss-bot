@@ -1,4 +1,5 @@
 from src.UnicornBinanceTrailingStopLossEngine import UnicornBinanceTrailingStopLossEngine
+from src.Config import Config
 from src.BaseClass import BaseClass
 from binance.client import Client
 import logging
@@ -16,14 +17,15 @@ class TrailingStopLossActivation(BaseClass):
 
     def __init__(self):
         self.stdout(f"Starting new instance of trend-activated-bot ...")
+        self.config = Config()
+        self.engine = None
         API_KEY = os.environ.get('API_KEY_3')
         API_SECRET = os.environ.get('API_SECRET')
-        if API_KEY is None or API_SECRET is None:
+        if self.config.API_KEY is None or self.config.API_SECRET is None:
             self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
         self.client = Client(api_key=API_KEY, api_secret=API_SECRET)
         self.engine = UnicornBinanceTrailingStopLossEngine(API_KEY, API_SECRET, "BTCUSD")
         self.stdout(f"instantiated Stop Loss Engine ...")
-        self.engine.ubtsl.stop_manager()
         try:
             while True:
                 time.sleep(60)
@@ -40,7 +42,8 @@ class TrailingStopLossActivation(BaseClass):
         self.stdout(f"Stopping ... please wait a few seconds! {exit_msg}", "CRITICAL")
         self.stop_request = True
         try:
-            self.engine.ubtsl.stop_manager()
+            if self.engine:
+                self.engine.ubtsl.stop_manager()
             sys.exit(exit_code)
         except Exception as e:
             self.stdout(f"Unknown Error in exit_all() - {e}", "CRITICAL", print_enabled=True)
