@@ -11,7 +11,7 @@ Take note of either of the two following steps:
 Make sure to cd into the root directory of trend-activated-trailing-stop-loss-algo to then create a conda 
 environment from the environment yaml file:
 ```
-conda env create -f trend_activated_algo_env.yml
+conda env create -f trend_activated_bot_env.yml
 ```
 Then you can activate the newly created environment that now houses the project's dependencies:
 ```
