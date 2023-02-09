@@ -9,5 +9,5 @@ class Config(BaseClass):
     def __init__(self):
         self.stdout(f"Loading trend-activated-bot configuration ...")
 
-    API_KEY = os.environ.get('API_KEY')  #: :meta hide-value:
-    API_SECRET = None
+    API_KEY = os.environ.get('API_KEY')
+    API_SECRET = os.environ.get('API_SECRET')
