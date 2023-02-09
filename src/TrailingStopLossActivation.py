@@ -19,12 +19,10 @@ class TrailingStopLossActivation(BaseClass):
         self.stdout(f"Starting new instance of trend-activated-bot ...")
         self.config = Config()
         self.engine = None
-        API_KEY = os.environ.get('API_KEY_3')
-        API_SECRET = os.environ.get('API_SECRET')
         if self.config.API_KEY is None or self.config.API_SECRET is None:
             self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
-        self.client = Client(api_key=API_KEY, api_secret=API_SECRET)
-        self.engine = UnicornBinanceTrailingStopLossEngine(API_KEY, API_SECRET, "BTCUSD")
+        self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET)
+        self.engine = UnicornBinanceTrailingStopLossEngine(self.config.API_KEY, self.config.API_KEY, "BTCUSD")
         self.stdout(f"instantiated Stop Loss Engine ...")
         try:
             while True:
