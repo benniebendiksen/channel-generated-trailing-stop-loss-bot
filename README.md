@@ -30,6 +30,9 @@ upon by this project, found within the requirements.txt file:
 $ python3 -m pip install -r requirements.txt
 ```
 
+### Remote Virtual Machine Use
+For now we will want to set up a quick free tier virtual machine instance with Amazon AWS in order to interact with Binance. Instructions for doing so can be found [here](https://github.com/pablobendiksen/trend-activated-trailing-stop-loss-bot/tree/main/_REMOTE_LOGIN)
+
 ## Execute
 ```
 $ export API_KEY="aaa"
