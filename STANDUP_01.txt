@@ -29,10 +29,10 @@ For technologies, we propose
 
 Current Questions / Problems / Something you need
 =================================================
-* Need websocket connections to Binance's Futures markets to get data input to support our program
+* Getting market data from VM and passing to project program on local machine
 * Need to learn how to use the Unicorn Binance Trailing Stop Loss
 * Need to see how data input converts to MACD output
-* Need to experiment with our first indicator as a trigger to the trailing stop loss.
+* Need to experiment with our first indicator as a trigger to the trailing stop loss
 ...
 
 
