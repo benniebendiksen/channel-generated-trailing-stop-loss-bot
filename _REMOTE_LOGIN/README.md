@@ -12,9 +12,8 @@ of free uses each month for one year with up 30 GB of free storage space.
 Sign up for free, as a new user, with Amazon aws:  
 [https://aws.amazon.com/account/sign-up](https://aws.amazon.com/account/sign-up)
 
-![Instance Home](instance_home)
-
 ### Creating Your First Free Tier EC2 Instance
+![Instance Home](instance_home)
 Once signed in, from the aws Console, click on "EC2".
 Under 'Resources' click on "Instances", and then click "Launch instances".
 Under 'Application and OS Images (Amazon Machine Image)' the 'Quick Start' tab should already be highlighted for you along with the Amazon Linux option underneath it.
