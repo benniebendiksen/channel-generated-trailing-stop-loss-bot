@@ -1,6 +1,8 @@
 # AWS Instructions
 This document is intended to guide you through the steps of setting up your own free-tier Amazon aws EC2 Linux-based Virtual Machine instance and, 
-additionally, configuring your linux system to run the trend activated bot.
+additionally, configuring your linux system to run the trend activated bot. 
+
+Though Binance by far boasts the highest trade volume of any crypto currency, as well as the largest listings of coins with the most competitive trade fees around, we will need to, at first, interact with Binance via an Amazon AWS virtual machine. I am working to obtain a means to communicate Binance websocket streams from a remote virtual machine to instances of the trend activated bot program, so that you may run the bot from anywhere without concern for these steps. For now, please consider the following.
 
 ## Starting an AWS Free-Tier EC2 Instance
 Amazon AWS allows for a free 12 month use virtual machine instance for new AWS customers. Their Linux and Windows t2.micro instances includes 750 hours
@@ -38,3 +40,5 @@ When back on the Console you'll see that your new instance has "Running" under t
 
 On your local machine, open a commmand line interface under the folder in which you saved the .pem file; paste your copied ssh command there and run it.
 You should now have command line access to your 12 month free aws EC2 virtual machine instance!
+
+## Configuring your AWS Instance
