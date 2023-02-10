@@ -1,6 +1,6 @@
 # AWS Instructions
 This document is intended to guide you through the steps of setting up your own free-tier Amazon aws EC2 Linux-based Virtual Machine instance and, 
-additionally, configuring your linux system to run the trend activated bot. 
+additionally, configuring its linux system to run the trend activated bot. 
 
 Though Binance by far boasts the highest trade volume of any crypto currency, as well as the largest listings of coins with the most competitive trade fees around, we will need to, at first, interact with Binance via an Amazon AWS virtual machine. I am working to obtain a means to communicate Binance websocket streams from a remote virtual machine to instances of the trend activated bot program, so that you may run the bot from anywhere without concern for these steps. For now, please consider the following.
 
