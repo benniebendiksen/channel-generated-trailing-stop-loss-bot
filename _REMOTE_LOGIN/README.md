@@ -11,6 +11,7 @@ of free uses each month for one year with up 30 GB of free storage space.
 ### Sign up with AWS
 Sign up for free, as a new user, with Amazon aws:  
 [https://aws.amazon.com/account/sign-up](https://aws.amazon.com/account/sign-up)
+
 ![Instance Home](instance_home)
 
 ### Creating Your First Free Tier EC2 Instance
