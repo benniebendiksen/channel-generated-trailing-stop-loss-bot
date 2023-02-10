@@ -41,4 +41,6 @@ When back on the Console you'll see that your new instance has "Running" under t
 On your local machine, open a commmand line interface under the folder in which you saved the .pem file; paste your copied ssh command there and run it.
 You should now have command line access to your 12 month free aws EC2 virtual machine instance!
 
+![Amazon Instance](amazon_instance.png)
+
 ## Configuring your AWS Instance
