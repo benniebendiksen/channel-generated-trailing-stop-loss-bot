@@ -1,0 +1,43 @@
+# STANDUP 01 - 2/9/2023 TEAM Trading Bot
+
+
+General Update and Intro
+========================
+
+Project Leader: Pablo Bendiksen
+Team Members: Surinder Kaur, Javidan Mammdadov, Jie Lin, Pablo Bendiksen
+TA: Kiran
+Created Github repo: https://github.com/pablobendiksen/trend-activated-trailing-stop-loss-bot
+
+Draft of Requirements
+=====================
+MAIN: We will need to build a software that measures trend direction for the changing price of a market, then automatically buys/sells accordingly and smartly sets a trailing stop loss, all starting with a Moving Average Convergence/Divergence (MACD) model.
+
+The software needs to support
+* full automation of the trade process from signal generation, to automatic orders, to handling wallets, to risk management
+* error handling for expected and unexpected errors
+The software requirements:
+* LUCIT System Suite of open source libraries (e.g, Unicorn Binance Websocket API and Unicorn Binance Trailing Stop Loss)
+* User provided API Keys
+* MACD and other indicators to be implemented
+* Websocket connections for the streaming of order book and price data, that get closed and re-opened for every bot cyclemarkdown 
+...
+
+For technologies, we propose
+* Python
+* SQL
+
+Current Questions / Problems / Something you need
+=================================================
+* Need websocket connections to Binance's Futures markets to get data input to support our program
+* Need to learn how to use the Unicorn Binance Trailing Stop Loss
+* Need to see how data input converts to MACD output
+* Need to experiment with our first indicator as a trigger to the trailing stop loss.
+...
+
+
+List of Working Packages with responsible Student and Completion Dates
+======================================================================
+* Sign up with TradingView and begin observing Candlestick Charts, possibly applying Trading Indicators [Jie Lin, Javidan Mammadov, Surinder Kaur] by 2/17
+* Program the MACD to work with the Binance Futures Market [Pablo Bendiksen] by 2/17
+* Work together to see how the MACD interacts with price charts visually, and then understand this in terms of the code  [Jie Lin, Javidan Mammadov, Surinder Kaur, Pablo Bendiksen] by 2/17
