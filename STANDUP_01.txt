@@ -38,6 +38,14 @@ Current Questions / Problems / Something you need
 
 List of Working Packages with responsible Student and Completion Dates
 ======================================================================
+
+So far:
+* Draft Document of Trading Basics
+* Study Candlestick Chart
+* Instantiate AWS VM Instance in ap-northeast-1a for low-latency program to server interaction
+* Generate API Keys to Binance Futures Market for Data Reading
+
+Todo:
 * Sign up with TradingView and begin observing Candlestick Charts, possibly applying Trading Indicators [Jie Lin, Javidan Mammadov, Surinder Kaur] by 2/17
 * Program the MACD to work with the Binance Futures Market [Pablo Bendiksen] by 2/17
 * Work together to see how the MACD interacts with price charts visually, and then understand this in terms of the code  [Jie Lin, Javidan Mammadov, Surinder Kaur, Pablo Bendiksen] by 2/17
