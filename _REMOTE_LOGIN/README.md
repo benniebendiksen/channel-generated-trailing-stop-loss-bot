@@ -68,28 +68,6 @@ From the Python3.10 root directory, run the following to recompile and rebuild P
 ./configure --enable-loadable-sqlite-extensions && make && sudo make install
 ```
 
-### Install Anaconda on your EC2 Instance
-To make for the easiest reproduction of the trend activated bot environment in our EC2 instance, let's quickly install Anaconda.
-
-Copy link address from Anaconda installer archive; in EC2 instance terminal, type:
-```
-wget https://repo.continuum.io/archive/Anaconda2-4.1.1-Linux-x86_64.sh
-```
-
-followed by:
-```
-bash what_Anaconda_you_downloaded_Linux_x86_64.sh
-```
-
-followed by:
-```
-source .bashrc
-```
-
-Now you should be able to use Anaconda and all its feautures within your EC2 instance.
-## Running Trend Activated Bot from your EC2 Instance
-You are almost ready to run trend activated bot from your virtual machine. Let us copy the project over into the VM.
-
 ### Copy Project into your EC2 Instance
 From the folder on your local machine that holds your .pem file, scp the project into the VM following the format:
 ```
@@ -105,14 +83,16 @@ echo "export API_SECRET=bbb">>~/.bash_profile
 ```
 using your specific key values
 
-Don't forget to create a conda environment from the project's provided yml file; from the project root directory, run:
+#### Install Python Dependecies
+To install non-native python libraries used by this program, simply run:
 ```
-conda env create -f trend_activated_bot_env.yml
+python3 -m pip install -r requirements.txt 
 ```
+from the root directory of the project.
 
 You can now finally run your program! Just type:
 ```
-python3.10 main.py
+python main.py
 ```
 and watch the program execute :)
 
