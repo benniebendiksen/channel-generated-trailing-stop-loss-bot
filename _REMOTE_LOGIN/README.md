@@ -51,23 +51,6 @@ You should now have command line access to your 12 month free aws EC2 virtual ma
 
 ## Configuring your AWS Instance
 We will need to prepare your EC2 instance to be able to run our python program with all of its dependencies. We start by installing Python 3.10 into our instance.
-
-### Installing Python 3.10 into your Instance
-Follow this straightforward guide from 'Getting Started' up to, and including 'Step 3':
-[https://techviewleo.com/how-to-install-python-on-amazon-linux-2/](https://techviewleo.com/how-to-install-python-on-amazon-linux-2/)
-
-### Enable sqlite on your Python 3.10 install
-Down the line, we will want to gather data regarding the outcome of our buy and sell activity (i.e., was it a profitable trade or not). We therefore will want to store data into a database file and query it. Though sqlite comes as a feature to Python 3.10, in our case we have to install it explicitly since we did our own Python 3.10 build.
-Run:
-```
-sudo yum install sqlite-devel
-```
-
-From the Python3.10 root directory, run the following to recompile and rebuild Python:
-```
-./configure --enable-loadable-sqlite-extensions && make && sudo make install
-```
-
 ### Copy Project into your EC2 Instance
 From the folder on your local machine that holds your .pem file, scp the project into the VM following the format:
 ```
