@@ -24,6 +24,7 @@ class TrailingStopLossActivation(BaseClass):
         try:
             self.stdout(f"Starting new instance of trend-activated-bot ...")
             self.config = Config()
+            self.price = 0.0
             self.engine = None
             if self.config.API_KEY is None or self.config.API_SECRET is None:
                 self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
