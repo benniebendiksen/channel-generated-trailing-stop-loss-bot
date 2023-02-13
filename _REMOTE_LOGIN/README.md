@@ -63,6 +63,7 @@ To permanently set your keys as os environment variables, from the EC2 instance 
 ```
 echo "export API_KEY=aaa">>~/.bash_profile
 echo "export API_SECRET=bbb">>~/.bash_profile
+source ~/.bash_profile
 ```
 using your specific key values
 
