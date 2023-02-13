@@ -11,3 +11,6 @@ class Config(BaseClass):
 
     API_KEY = os.environ.get('API_KEY')
     API_SECRET = os.environ.get('API_SECRET')
+    CANDLESTICK_TIME_INTERVAL = '1m'
+    MA_FAST = 3
+    MA_SLOW = 5
