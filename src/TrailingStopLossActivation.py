@@ -1,5 +1,6 @@
 import math
 import threading
+
 from src.UnicornBinanceTrailingStopLossEngine import UnicornBinanceTrailingStopLossEngine
 from unicorn_binance_websocket_api.manager import BinanceWebSocketApiManager
 from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
@@ -24,8 +25,8 @@ class TrailingStopLossActivation(BaseClass):
         try:
             self.stdout(f"Starting new instance of trend-activated-bot ...")
             self.config = Config()
-            self.price = 0.0
             self.engine = None
+            self.price = 0.0
             if self.config.API_KEY is None or self.config.API_SECRET is None:
                 self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
             # initialize client object for api calls to server for data
@@ -36,13 +37,12 @@ class TrailingStopLossActivation(BaseClass):
             binance_websocket_api_manager.create_stream(["aggTrade"], markets)
             self.stdout(f"Started Websocket Manager ...")
             self.initialize_moving_averages('BTCUSDT')
+            ##The following commented out codde can help you print moving averages / macd in a loop
             # start a worker process to move the received stream_data from the stream_buffer to a print function
-            worker_thread = threading.Thread(target=self.print_stream_data_from_stream_buffer,
-                                             args=(binance_websocket_api_manager,), daemon=True)
-            worker_thread.start()
+            # worker_thread = threading.Thread(target=self.print_stream_data_from_stream_buffer,
+            #                                  args=(binance_websocket_api_manager,), daemon=True)
+            # worker_thread.start()
 
-            ### for future use ###
-            # self.engine = UnicornBinanceTrailingStopLossEngine(self.config.API_KEY, self.config.API_KEY, "BTCUSDT")
             while True:
                 time.sleep(60)
         except KeyboardInterrupt:
