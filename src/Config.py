@@ -14,3 +14,4 @@ class Config(BaseClass):
     CANDLESTICK_TIME_INTERVAL = '1m'
     MA_FAST = 3
     MA_SLOW = 5
+    SIGNAL_LENGTH = 3
