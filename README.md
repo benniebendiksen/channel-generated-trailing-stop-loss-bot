@@ -2,36 +2,30 @@
 A Technical Analysis employing test of the Unicorn Binance Trailing Stop Loss Engine within Binance's Futures Exchange
 
 ## Installation
-Installation can take the form of either creating a Conda environment with the provided yml file or, alternatively 
-creating a Python virtual environment.
-
-Take note of either of the two following steps:
+Make sure to have Conda installed as it allows for easy virtual environment management creation and replication
 
 ### Conda Environment Creation
-Make sure to cd into the root directory of trend-activated-trailing-stop-loss-algo to then create a conda 
-environment from the environment yaml file:
+Open up a command line interface and from the root directory of the project run:
 ```
-conda env create -f trend_activated_bot_env.yml
+conda env create -f environment.yml
 ```
-Then you can activate the newly created environment that now houses the project's dependencies:
+This will create the conda environment for you to the correct specifications. Then run:
 ```
-conda activate trend_activated_algo_env
+conda activate trend_activated_bot_env
 ```
-
-### Virtual Environment Creation
-You can alternatively create/load a Python virtual environment from the root directory:
+This will activate the conda environment for you. Now run:
 ```
-$ python3 -m venv trend_activated_bot_env
-$ source trend_activated_bot_env/bin/activate
+poetry build
 ```
-Having created this venv without a yml file, you will need to install the non-native libraries relied 
-upon by this project, found within the requirements.txt file:
+to build the project. Now you can spin up the remote server by running:
 ```
-$ python3 -m pip install -r requirements.txt
+python ws_consumer/src/server.py
 ```
-
-### Remote Virtual Machine Use
-For now we will want to set up a quick free tier virtual machine instance with Amazon AWS in order to interact with Binance. Instructions for doing so can be found [here](https://github.com/pablobendiksen/trend-activated-trailing-stop-loss-bot/tree/main/_REMOTE_LOGIN)
+You are able to now run the project! Either open up another command line interface and, from the root directory of the project run:
+```
+python trend_activated_app/main.py
+```
+to stream data to your local machine. You can also use your favorite IDE, such as PyCharm, by setting its project Python Interpreter to the created trend_activated_bot_env Conda environment.
 
 ## Execute
 ```
