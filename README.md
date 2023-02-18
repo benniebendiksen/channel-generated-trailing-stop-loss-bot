@@ -26,6 +26,7 @@ You are able to now run the project! Either open up another command line interfa
 python trend_activated_app/main.py
 ```
 to stream data to your local machine. You can also use your favorite IDE, such as PyCharm, by setting its project Python Interpreter to the created trend_activated_bot_env Conda environment.
+![ide_stream.png](ide_stream.png)
 
 ## Execute
 ```
