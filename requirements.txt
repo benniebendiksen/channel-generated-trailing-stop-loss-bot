@@ -1,59 +1,9 @@
-aiohttp==3.8.4
-aiosignal==1.3.1
-aniso8601 @ file:///home/conda/feedstock_root/build_artifacts/aniso8601_1618789466884/work
-async-timeout==4.0.2
-attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1671632566681/work
-brotlipy @ file:///Users/runner/miniforge3/conda-bld/brotlipy_1666764759924/work
-certifi==2022.12.7
-cffi @ file:///Users/runner/miniforge3/conda-bld/cffi_1671179893800/work
-charset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1661170624537/work
-cheroot @ file:///home/conda/feedstock_root/build_artifacts/cheroot_1668890352408/work
-click @ file:///home/conda/feedstock_root/build_artifacts/click_1666798198223/work
-colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1666700638685/work
-cryptography @ file:///Users/runner/miniforge3/conda-bld/cryptography-split_1675828699498/work
-dateparser @ file:///home/conda/feedstock_root/build_artifacts/dateparser_1675378206814/work
-Flask @ file:///home/conda/feedstock_root/build_artifacts/flask_1676592993069/work
-Flask-RESTful @ file:///home/conda/feedstock_root/build_artifacts/flask-restful_1622406740831/work
-frozenlist==1.3.3
-h11==0.14.0
-idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1663625384323/work
-importlib-metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1672612343532/work
-itsdangerous @ file:///home/conda/feedstock_root/build_artifacts/itsdangerous_1648147185463/work
-jaraco.functools @ file:///home/conda/feedstock_root/build_artifacts/jaraco.functools_1667024645470/work
-Jinja2 @ file:///home/conda/feedstock_root/build_artifacts/jinja2_1654302431367/work
-MarkupSafe @ file:///Users/runner/miniforge3/conda-bld/markupsafe_1674135859696/work
-more-itertools @ file:///home/conda/feedstock_root/build_artifacts/more-itertools_1666110321141/work
-multidict==6.0.4
-numpy==1.22.1
 pandas==1.4.3
-psutil @ file:///Users/runner/miniforge3/conda-bld/psutil_1667886128069/work
-pyasn1==0.4.8
-pyasn1-modules==0.2.7
-pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1636257122734/work
-pyOpenSSL @ file:///home/conda/feedstock_root/build_artifacts/pyopenssl_1672659226110/work
-PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1661604839144/work
-python-binance==1.0.16
-python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
-pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1673864280276/work
-pytz-deprecation-shim @ file:///Users/runner/miniforge3/conda-bld/pytz-deprecation-shim_1666782073420/work
-regex @ file:///Users/runner/miniforge3/conda-bld/regex_1646210100857/work
-requests @ file:///home/conda/feedstock_root/build_artifacts/requests_1673863902341/work
-service-identity==18.1.0
+requests==2.28.1
+unicorn-binance-websocket-api==1.41.0
+unicorn-binance-rest-api==1.5.0
+unicorn-binance-trailing-stop-loss==0.8.0
 shared-memory-dict==0.7.2
-simple-websocket==0.9.0
-six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
-tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1669846329064/work
-tzlocal @ file:///Users/runner/miniforge3/conda-bld/tzlocal_1666795481955/work
-ubtsl @ file:///home/conda/feedstock_root/build_artifacts/ubtsl_1650979121774/work
-ujson @ file:///Users/runner/miniforge3/conda-bld/ujson_1675192014805/work
-unicorn-binance-rest-api @ file:///home/conda/feedstock_root/build_artifacts/unicorn-binance-rest-api_1652271859061/work
-unicorn-binance-trailing-stop-loss @ file:///home/conda/feedstock_root/build_artifacts/unicorn-binance-trailing-stop-loss_1652423767469/work
-unicorn-binance-websocket-api @ file:///home/conda/feedstock_root/build_artifacts/unicorn-binance-websocket-api_1650313531545/work
-unicorn-fy @ file:///home/conda/feedstock_root/build_artifacts/unicorn-fy_1647680866924/work
-urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1673452138552/work
-websocket-client @ file:///home/conda/feedstock_root/build_artifacts/websocket-client_1675567828044/work
-websockets @ file:///Users/runner/miniforge3/conda-bld/websockets_1650300381352/work
-Werkzeug @ file:///home/conda/feedstock_root/build_artifacts/werkzeug_1676411946679/work
-wsproto==1.2.0
-yarl==1.8.2
-zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1676708471276/work
+numpy==1.22.1
+setuptools==65.5.1
+urllib3==1.26.11

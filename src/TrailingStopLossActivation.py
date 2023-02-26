@@ -34,16 +34,16 @@ class TrailingStopLossActivation(BaseClass):
             if self.config.API_KEY is None or self.config.API_SECRET is None:
                 self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
             # initialize client object for api calls to server for data
-            # self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET)
+            self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET)
 
             binance_websocket_api_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
             markets = {'btcusdt'}
             binance_websocket_api_manager.create_stream(["aggTrade"], markets, output="UnicornFy")
             self.stdout(f"Started Websocket Manager ...")
-            # self.initialize_macd("BTCUSDT")
+            self.initialize_macd("BTCUSDT")
             #The following updates macd in a loop
             # start a thread to updaate candlestick df and another to process stream data
-            # threading.Thread(target=self.schedule_candlestick_df_update,  args=("BTCUSDT",), daemon=True).start()
+            threading.Thread(target=self.schedule_candlestick_df_update,  args=("BTCUSDT",), daemon=True).start()
             threading.Thread(target=self.process_stream_data_from_stream_buffer,  args=(binance_websocket_api_manager, "BTCUSDT"), daemon=True).start()
 
             while self.is_stopping() is False:
@@ -232,10 +232,9 @@ class TrailingStopLossActivation(BaseClass):
                 time.sleep(0.01)
             else:
                 try:
-                    # self.price = float(oldest_stream_data_from_stream_buffer.get("price"))
-                    # self.trend_direction = self.calculate_macd(oldest_stream_data_from_stream_buffer, coinpair)
-                    # print(self.trend_direction)
-                    print(oldest_stream_data_from_stream_buffer)
+                    self.price = float(oldest_stream_data_from_stream_buffer.get("price"))
+                    self.trend_direction = self.calculate_macd(oldest_stream_data_from_stream_buffer, coinpair)
+                    print(self.trend_direction)
                 except TypeError as error_msg:
                     # Result of None expected when websocket first establishing connection
                     if "None" in str(error_msg):
