@@ -1,2 +1,4 @@
 # .log files
 *.log
+# pem keys for remote vm access
+*.pem
