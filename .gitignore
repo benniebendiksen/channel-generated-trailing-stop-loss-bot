@@ -2,3 +2,5 @@
 *.log
 # pem keys for remote vm access
 *.pem
+# json files as ssh connection to remote results in reading stdout to a json locally
+*.json 

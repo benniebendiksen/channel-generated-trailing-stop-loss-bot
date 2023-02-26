@@ -2,13 +2,17 @@ import math
 import threading
 
 from src.UnicornBinanceTrailingStopLossEngine import UnicornBinanceTrailingStopLossEngine
-from unicorn_binance_websocket_api.manager import BinanceWebSocketApiManager
-from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
 from src.BaseClass import BaseClass
 from src.Config import Config
+from unicorn_binance_websocket_api.manager import BinanceWebSocketApiManager
+from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
 from datetime import datetime
+import paramiko
+from paramiko import SSHClient
+from paramiko import AutoAddPolicy
 import pandas as pd
 import numpy as np
+import json
 import logging
 import time
 import sys
@@ -34,7 +38,7 @@ class TrailingStopLossActivation(BaseClass):
             if self.config.API_KEY is None or self.config.API_SECRET is None:
                 self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
             # initialize client object for api calls to server for data
-            self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET)
+            # self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET)
 
             binance_websocket_api_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
             markets = {'btcusdt'}
@@ -92,11 +96,12 @@ class TrailingStopLossActivation(BaseClass):
     def initialize_macd(self, coinpair):
         try:
             #make api call to server for candlestick data
-            response = self.get_kline_volume(coinpair, self.config.CANDLESTICK_TIME_INTERVAL, self.config.MA_SLOW)
-            #data preprocessing
-            array_response = np.array(response)
-            list_response = array_response[:, [0, 4]].tolist()  # subset by timestamp and 'close' fields
-            df_prices = pd.DataFrame(list_response) # convert to dataframe
+            # response = self.get_kline_volume(coinpair, self.config.CANDLESTICK_TIME_INTERVAL, self.config.MA_SLOW)
+            # #data preprocessing
+            # array_response = np.array(response)
+            # list_response = array_response[:, [0, 4]].tolist()  # subset by timestamp and 'close' fields
+            # df_prices = pd.DataFrame(list_response) # convert to dataframe
+            df_prices = self.fetch_remote_client_dataframe()
             df_prices.iloc[:, 0] = df_prices.iloc[:, 0].apply(lambda x: datetime.utcfromtimestamp(
                 (int(x) + 1) / 1e3))  # provide one millisecond and break down into fractions of a second
             df_prices.iloc[:, 1] = df_prices.iloc[:, 1].apply(lambda x: float(x))
@@ -115,6 +120,36 @@ class TrailingStopLossActivation(BaseClass):
             self.stdout(f"Unknown Error in initialize_moving_averages() for {coinpair} - {error_msg} - "
                         f"Aborting...", "CRITICAL", True)
             self.exit_all(exit_code=0, exit_msg=f"Fatal Error — terminating")
+
+    def fetch_remote_client_dataframe(self):
+        try:
+            user = 'ec2-user'
+            pri_key = paramiko.RSAKey.from_private_key_file(self.config.REMOTE_KEYS_PATH)
+            cmd = 'python JL_temp/src/RunRemoteClientData.py'
+            ssh = SSHClient()
+            ssh.set_missing_host_key_policy(AutoAddPolicy())
+            print("[+] Start ssh into:" + self.config.REMOTE_ADDRESS)
+            ssh.connect(hostname=self.config.REMOTE_ADDRESS, username=user, pkey=pri_key)
+            print("[+] SSH established !")
+            print(f"[+] running following command remotely: {cmd}")
+            stdin, stdout, stderr = ssh.exec_command(cmd)
+            tempJSON_str = stdout.read().decode('ascii')
+            print(f"[+] read following output from remote: {tempJSON_str}")
+            temp_json_file = open("df_prices_returned.json", "wt")
+            n = temp_json_file.write(tempJSON_str)
+            temp_json_file.close()
+            ssh.close()
+            tempPD = pd.read_json('df_prices_returned.json', orient='split')
+            if stderr.read() != None:
+                print("[+] error: ")
+                print(stderr.read())
+            return tempPD
+        except Exception as e:
+            self.stdout(f"Unknown Error in fetch_remote_client_dataframe() - {e} - "
+                        f"Aborting...", "CRITICAL", True)
+            self.exit_all(exit_code=0, exit_msg=f"Fatal Error — terminating")
+        finally:
+            ssh.close()
 
     def _generate_signals(self, df, name):
         """
