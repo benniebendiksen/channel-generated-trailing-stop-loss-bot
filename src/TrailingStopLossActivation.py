@@ -47,7 +47,7 @@ class TrailingStopLossActivation(BaseClass):
             self.stdout(f"Started Websocket Manager ...")
             self.initialize_macd("BTCUSDT")
             # The following updates macd in a loop
-            # start a thread to updaate candlestick df and another to process stream data
+            # start a thread to update candlestick df and another to process stream data
             threading.Thread(target=self.schedule_candlestick_df_update, args=("BTCUSDT",), daemon=True).start()
             threading.Thread(target=self.process_stream_data_from_stream_buffer,
                              args=(binance_websocket_api_manager, "BTCUSDT"), daemon=True).start()
@@ -126,7 +126,7 @@ class TrailingStopLossActivation(BaseClass):
         try:
             user = 'ec2-user'
             pri_key = paramiko.RSAKey.from_private_key_file(
-                "/Users/bendiksen/Desktop/trend-activated-trailing-stop-loss-bot/MY_AWS_KEYS.pem")
+                self.config.REMOTE_KEYS_PATH)
             if st == '-1.0' or et == '-1.0':
                 cmd = 'python trend-activated-trailing-stop-loss-bot/src/RunRemoteClientDataWithArgs.py ' + coinpair + ' ' + \
                       str(candle_time_interval) + ' ' + \

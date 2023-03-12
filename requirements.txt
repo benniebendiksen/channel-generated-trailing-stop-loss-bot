@@ -7,3 +7,4 @@ shared-memory-dict==0.7.2
 numpy==1.22.1
 setuptools==65.5.1
 urllib3==1.26.11
+paramiko~=3.0.0
