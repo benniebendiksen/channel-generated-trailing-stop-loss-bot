@@ -25,6 +25,7 @@ class TrailingStopLossActivation(BaseClass):
                         format="{asctime} [{levelname:8}] {process} {thread} {module}: {message}",
                         style="{")
     logging.getLogger("unicorn_binance_trailing_stop_loss")
+
     def __init__(self):
         try:
             self.stdout(f"Starting new instance of trend-activated-bot ...")
@@ -45,10 +46,11 @@ class TrailingStopLossActivation(BaseClass):
             binance_websocket_api_manager.create_stream(["aggTrade"], markets, output="UnicornFy")
             self.stdout(f"Started Websocket Manager ...")
             self.initialize_macd("BTCUSDT")
-            #The following updates macd in a loop
+            # The following updates macd in a loop
             # start a thread to updaate candlestick df and another to process stream data
-            threading.Thread(target=self.schedule_candlestick_df_update,  args=("BTCUSDT",), daemon=True).start()
-            threading.Thread(target=self.process_stream_data_from_stream_buffer,  args=(binance_websocket_api_manager, "BTCUSDT"), daemon=True).start()
+            threading.Thread(target=self.schedule_candlestick_df_update, args=("BTCUSDT",), daemon=True).start()
+            threading.Thread(target=self.process_stream_data_from_stream_buffer,
+                             args=(binance_websocket_api_manager, "BTCUSDT"), daemon=True).start()
 
             while self.is_stopping() is False:
                 time.sleep(60)
@@ -74,7 +76,7 @@ class TrailingStopLossActivation(BaseClass):
             sys.exit(exit_code)
         except Exception as e:
             self.stdout(f"Unknown Error in exit_all() - {e}", "CRITICAL", print_enabled=True)
-    
+
     def is_stopping(self):
         """
         Is there a stop request?
@@ -92,22 +94,21 @@ class TrailingStopLossActivation(BaseClass):
                         f"Aborting...", "CRITICAL", True)
             self.exit_all(exit_code=0, exit_msg=f"Fatal Error — terminating")
 
-
     def initialize_macd(self, coinpair):
         try:
-            #make api call to server for candlestick data
+            # make api call to server for candlestick data
             # response = self.get_kline_volume(coinpair, self.config.CANDLESTICK_TIME_INTERVAL, self.config.MA_SLOW)
             # #data preprocessing
             # array_response = np.array(response)
             # list_response = array_response[:, [0, 4]].tolist()  # subset by timestamp and 'close' fields
             # df_prices = pd.DataFrame(list_response) # convert to dataframe
-            df_prices = self.fetch_remote_client_dataframe()
+            df_prices = self.fetchRemoteClientDataFrameWithArgs()
             df_prices.iloc[:, 0] = df_prices.iloc[:, 0].apply(lambda x: datetime.utcfromtimestamp(
                 (int(x) + 1) / 1e3))  # provide one millisecond and break down into fractions of a second
             df_prices.iloc[:, 1] = df_prices.iloc[:, 1].apply(lambda x: float(x))
             df_prices.rename(columns={df_prices.columns[0]: "datetime", df_prices.columns[1]: "close"}, inplace=True)
             df_prices.set_index("datetime", inplace=True)
-            #now ready to generate moving averages
+            # now ready to generate moving averages
             signals = self._generate_signals(df_prices, 'Null')
             if signals['macd_line'][-1] > signals['signal_line'][-1]:
                 trend_direction = "UP"
@@ -121,24 +122,39 @@ class TrailingStopLossActivation(BaseClass):
                         f"Aborting...", "CRITICAL", True)
             self.exit_all(exit_code=0, exit_msg=f"Fatal Error — terminating")
 
-    def fetch_remote_client_dataframe(self):
+    def fetchRemoteClientDataFrameWithArgs(self, coinpair="BTCUSDT", candle_time_interval = '1m', num_candles = 5, st='-1.0', et='-1.0'):
         try:
             user = 'ec2-user'
-            pri_key = paramiko.RSAKey.from_private_key_file(self.config.REMOTE_KEYS_PATH)
-            cmd = 'python JL_temp/src/RunRemoteClientData.py'
-            ssh = SSHClient()
-            ssh.set_missing_host_key_policy(AutoAddPolicy())
+            pri_key = paramiko.RSAKey.from_private_key_file(
+                "/Users/bendiksen/Desktop/trend-activated-trailing-stop-loss-bot/MY_AWS_KEYS.pem")
+            if st == '-1.0' or et == '-1.0':
+                cmd = 'python trend-activated-trailing-stop-loss-bot/src/RunRemoteClientDataWithArgs.py ' + coinpair + ' ' + \
+                      str(candle_time_interval) + ' ' + \
+                      str(num_candles)
+
+            else:
+                print("startTime:" + str(float(datetime.strptime(st, "%Y-%m-%d %H:%M:%S").timestamp()) * 1000))
+                print(datetime.fromtimestamp(datetime.strptime(st, "%Y-%m-%d %H:%M:%S").timestamp()))
+                print("endTime:" + str(float(datetime.strptime(et, "%Y-%m-%d %H:%M:%S").timestamp()) * 1000))
+                print(datetime.fromtimestamp(datetime.strptime(et, "%Y-%m-%d %H:%M:%S").timestamp()))
+                cmd = 'python trend-activated-trailing-stop-loss-bot/src/RunRemoteClientDataWithArgs.py ' + coinpair + ' ' \
+                      + str(candle_time_interval) + ' ' \
+                      + str(num_candles) + ' ' \
+                      + str(float(datetime.strptime(st, "%Y-%m-%d %H:%M:%S").timestamp()) * 1000) + ' ' \
+                      + str(float(datetime.strptime(et, "%Y-%m-%d %H:%M:%S").timestamp()) * 1000) + ' '
+            s = SSHClient()
+            s.set_missing_host_key_policy(AutoAddPolicy())
             print("[+] Start ssh into:" + self.config.REMOTE_ADDRESS)
-            ssh.connect(hostname=self.config.REMOTE_ADDRESS, username=user, pkey=pri_key)
+            s.connect(hostname=self.config.REMOTE_ADDRESS, username=user, pkey=pri_key)
             print("[+] SSH established !")
             print(f"[+] running following command remotely: {cmd}")
-            stdin, stdout, stderr = ssh.exec_command(cmd)
+            stdin, stdout, stderr = s.exec_command(cmd)
             tempJSON_str = stdout.read().decode('ascii')
             print(f"[+] read following output from remote: {tempJSON_str}")
             temp_json_file = open("df_prices_returned.json", "wt")
             n = temp_json_file.write(tempJSON_str)
             temp_json_file.close()
-            ssh.close()
+            s.close()
             tempPD = pd.read_json('df_prices_returned.json', orient='split')
             if stderr.read() != None:
                 print("[+] error: ")
@@ -149,7 +165,7 @@ class TrailingStopLossActivation(BaseClass):
                         f"Aborting...", "CRITICAL", True)
             self.exit_all(exit_code=0, exit_msg=f"Fatal Error — terminating")
         finally:
-            ssh.close()
+            s.close()
 
     def _generate_signals(self, df, name):
         """
@@ -175,8 +191,6 @@ class TrailingStopLossActivation(BaseClass):
             self.stdout(f"Unknown Error in _generate_signals() for {name} - {e} - "
                         f"Aborting...", "CRITICAL", True)
             self.exit_all(exit_code=0, exit_msg=f"Fatal Error — terminating")
-
-
 
     def schedule_candlestick_df_update(self, coinpair):
         """
@@ -209,7 +223,7 @@ class TrailingStopLossActivation(BaseClass):
                         'close': self.price}
             df = pd.DataFrame([row_dict])
             df.set_index('datetime', inplace=True)
-            self.df_prices= pd.concat([self.df_prices, df])
+            self.df_prices = pd.concat([self.df_prices, df])
             self.df_prices = self.df_prices.drop(self.df_prices.index[0])
         except Exception as error_msg:
             print(f"Error in update_candlestick_df() for {coinpair} - with df: {self.df} - {error_msg}")
@@ -251,12 +265,9 @@ class TrailingStopLossActivation(BaseClass):
             print(f"INDEX ERROR: {i} \nfor {coinpair} with candlesticks: {self.df_prices}")
         except Exception as e:
             self.stdout(f"Unknown Error in calculate_macd() for {coinpair} - {e} - "
-                            f"Aborting...",
-                            "CRITICAL", True)
+                        f"Aborting...",
+                        "CRITICAL", True)
             self.exit_all(exit_code=0, exit_msg=f"Fatal Error — terminating")
-
-
-
 
     def process_stream_data_from_stream_buffer(self, binance_websocket_api_manager, coinpair):
         while self.is_stopping() is False:
@@ -276,7 +287,6 @@ class TrailingStopLossActivation(BaseClass):
                         pass
                 except Exception as e:
                     self.stdout(f"Unknown Error in process_stream_data_from_stream_buffer() for {coinpair} - {e} - "
-                            f"Aborting...",
-                            "CRITICAL", True)
+                                f"Aborting...",
+                                "CRITICAL", True)
                     self.exit_all(exit_code=0, exit_msg=f"Fatal Error — terminating")
-
