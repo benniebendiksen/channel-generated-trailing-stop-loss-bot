@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="extend remote dataframe fetching to futures markets">
+    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="begin three indicator backtesting python">
+      <change afterPath="$PROJECT_DIR$/aws_remote_access/RemoteGetFutureDataWithSpecificInterval_In_Seconds.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/getCandleSticks2ComputeBoll_4_own_response.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/getCandleSticks2MACD_2_own_response.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/getCandleSticks2RSI_2_own_response.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SSHClientSingleton.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Indicators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +46,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/aws_remote_access" />
       <recent name="$PROJECT_DIR$/pine_scripts" />
     </key>
   </component>
@@ -115,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678662201126</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="begin three indicator backtesting python">
+      <created>1679419253017</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679419253017</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,6 +148,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="extend remote dataframe fetching to use optional keyword args" />
     <MESSAGE value="extend remote dataframe fetching to futures markets" />
-    <option name="LAST_COMMIT_MESSAGE" value="extend remote dataframe fetching to futures markets" />
+    <MESSAGE value="begin three indicator backtesting python" />
+    <option name="LAST_COMMIT_MESSAGE" value="begin three indicator backtesting python" />
   </component>
 </project>

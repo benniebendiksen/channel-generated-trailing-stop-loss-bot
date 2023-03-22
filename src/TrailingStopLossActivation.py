@@ -4,6 +4,8 @@ import threading
 from src.UnicornBinanceTrailingStopLossEngine import UnicornBinanceTrailingStopLossEngine
 from src.BaseClass import BaseClass
 from src.Config import Config
+from src.Indicators import Indicators
+from src.CoinPair import CoinPair
 from unicorn_binance_websocket_api.manager import BinanceWebSocketApiManager
 from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
 from datetime import datetime
@@ -45,12 +47,15 @@ class TrailingStopLossActivation(BaseClass):
             markets = {'btcusdt'}
             binance_websocket_api_manager.create_stream(["aggTrade"], markets, output="UnicornFy")
             self.stdout(f"Started Websocket Manager ...")
-            self.initialize_macd("BTCUSDT")
-            # The following updates macd in a loop
-            # start a thread to update candlestick df and another to process stream data
-            threading.Thread(target=self.schedule_candlestick_df_update, args=("BTCUSDT",), daemon=True).start()
-            threading.Thread(target=self.process_stream_data_from_stream_buffer,
-                             args=(binance_websocket_api_manager, "BTCUSDT"), daemon=True).start()
+            self.coinpairs = ["BTCUSDT", "ETHUSDT"]
+            self.coinpair_instances = [CoinPair(self, coinpair) for coinpair in self.coinpairs]
+            self.indicators = Indicators(self, self.config, self.coinpair_instances)
+            # self.initialize_macd("BTCUSDT")
+            # # The following updates macd in a loop
+            # # start a thread to update candlestick df and another to process stream data
+            # threading.Thread(target=self.schedule_candlestick_df_update, args=("BTCUSDT",), daemon=True).start()
+            # threading.Thread(target=self.process_stream_data_from_stream_buffer,
+            #                  args=(binance_websocket_api_manager, "BTCUSDT"), daemon=True).start()
 
             while self.is_stopping() is False:
                 time.sleep(60)
