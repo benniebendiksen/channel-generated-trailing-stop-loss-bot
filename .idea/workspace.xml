@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="begin three indicator backtesting python">
-      <change afterPath="$PROJECT_DIR$/aws_remote_access/RemoteGetFutureDataWithSpecificInterval_In_Seconds.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getCandleSticks2ComputeBoll_4_own_response.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getCandleSticks2MACD_2_own_response.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getCandleSticks2RSI_2_own_response.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SSHClientSingleton.py" afterDir="false" />
+    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="test paramiko use for multiple coinpairs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/getCandleSticks2ComputeBoll_4_own_response.py" beforeDir="false" afterPath="$PROJECT_DIR$/getCandleSticks2ComputeBoll_4_own_response.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoinPair.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoinPair.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Indicators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SSHClientSingleton.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/SSHClientSingleton.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +50,28 @@
       <recent name="$PROJECT_DIR$/pine_scripts" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main (1)">
+  <component name="RunManager" selected="Python.getCandleSticks2ComputeBoll_4_own_response">
+    <configuration name="getCandleSticks2ComputeBoll_4_own_response" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="trend-activated-trailing-stop-loss-bot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/getCandleSticks2ComputeBoll_4_own_response.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="trend-activated-trailing-stop-loss-bot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -96,6 +116,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.getCandleSticks2ComputeBoll_4_own_response" />
         <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.main" />
       </list>
@@ -131,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679419253017</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="test paramiko use for multiple coinpairs">
+      <created>1679465325022</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679465325022</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,6 +177,7 @@
     <MESSAGE value="extend remote dataframe fetching to use optional keyword args" />
     <MESSAGE value="extend remote dataframe fetching to futures markets" />
     <MESSAGE value="begin three indicator backtesting python" />
-    <option name="LAST_COMMIT_MESSAGE" value="begin three indicator backtesting python" />
+    <MESSAGE value="test paramiko use for multiple coinpairs" />
+    <option name="LAST_COMMIT_MESSAGE" value="test paramiko use for multiple coinpairs" />
   </component>
 </project>

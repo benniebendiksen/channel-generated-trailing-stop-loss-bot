@@ -13,6 +13,8 @@ class Config(BaseClass):
     API_SECRET = os.environ.get('API_SECRET')
     REMOTE_KEYS_PATH = "/Users/bendiksen/Desktop/trend-activated-trailing-stop-loss-bot/MY_AWS_KEYS.pem"
     REMOTE_ADDRESS = "18.183.102.61"
+    AGGTRADE_FILENAME = "df_aggTrade_returned.json"
+    MARKETS = ["btcusdt", "ethusdt"]
     CANDLESTICK_TIME_INTERVAL = '1m'
     #MACD PARAMS
     MA_FAST = 3

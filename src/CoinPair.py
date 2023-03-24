@@ -31,14 +31,14 @@ class CoinPair(BaseClass):
             if self.price == 0.0:
                 print(f"No price update for {self.name} at {datetime.now()}")
                 return
+            self.stdout(f"Updating Candlestick DF for {self.name} at {datetime.now()}")
             row_dict = {'datetime': self.df_close_prices.index[-1] + (self.df_close_prices.index[-1] -
                                                                       self.df_close_prices.index[-2]),
                         'close': self.price}
             df = pd.DataFrame([row_dict])
             df.set_index('datetime', inplace=True)
-            self.df_close_prices = pd.concat([self.df_prices, df])
+            self.df_close_prices = pd.concat([self.df_close_prices, df])
             self.df_close_prices = self.df_close_prices.drop(self.df_close_prices.index[0])
         except Exception as error_msg:
-            print(f"Error in update_candlestick_df() for {self.name} - with df: {self.df} - {error_msg}")
-        return
+            print(f"Error in update_candlestick_df() for {self.name} - with df: {self.df_close_prices} - {error_msg}")
 
