@@ -2,7 +2,7 @@
 A Technical Analysis employing test of the Unicorn Binance Trailing Stop Loss Engine within Binance's Futures Exchange
 
 ## Installation
-Make sure to have Conda installed as it allows for easy virtual environment management creation and replication
+Having Anaconda (or Miniconda) installed allows for easy virtual environment management creation and replication. Alternatively, non-native libraries relied upon by this project will be provided in the form of requirements.txt and setup.py files, respectively.
 
 ### Conda Environment Creation
 Open up a command line interface and from the root directory of the project run:
