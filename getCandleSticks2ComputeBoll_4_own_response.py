@@ -176,8 +176,8 @@ def filter_df_withGivenKeyWord_Value(df: pd.DataFrame, key, value):
 
 
 length = 180
-tempDF = get_candlestick(coinpair="BTCUSDT", amount=length + 2, startTime='2023-03-23 20:30:00',
-                         endTime='2023-03-23 21:00:00')
+tempDF = get_candlestick(coinpair="BTCUSDT", amount=length + 2, startTime='2023-03-24 0:28:00',
+                         endTime='2023-03-24 0:58:00')
 
 # tempDF = get_candlestick(coinpair="BTCUSDT", amount=length, startTime='-1.0', endTime='-1.0')
 close_array = tempDF[1].tolist()
