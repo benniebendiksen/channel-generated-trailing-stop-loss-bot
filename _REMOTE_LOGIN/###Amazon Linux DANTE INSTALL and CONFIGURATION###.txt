@@ -1,0 +1,97 @@
+###Amazon Linux DANTE INSTALL and CONFIGURATION###
+
+# Start by accessing root priviledge and running a system update
+sudo -i
+yum update -y
+
+# The dante-server package is not available in the Amazon Linux package repository #by default. Instead, you can build it from source following these steps:
+
+# Install the build tools and dependencies:
+yum groupinstall "Development Tools"
+yum install libevent-devel
+
+# Download the dante source code:
+curl -O https://www.inet.no/dante/files/dante-1.4.2.tar.gz
+
+#Extract the source code:
+tar xvzf dante-1.4.2.tar.gz
+cd dante-1.4.2
+
+#Configure and compile dante-server:
+./configure
+make
+make install
+
+# now lets check the installed Dante version to verify our install sockd -v
+
+#Copy the sockd.conf file over to the appropriate location for the Dante SOCKS5 server installation:
+cp /home/ec2-user/dante-1.4.2/example/sockd.conf /etc/sockd.conf	
+
+#Edit the sockd.comf file; to find the IP address of the eth0 interface please run:
+ ip add show eth0:
+
+vim /etc/sockd.conf
+
+```
+logoutput: stderr
+internal: 0.0.0.0 port = 1080
+external: 172.31.47.36
+clientmethod: none
+socksmethod: none
+user.privileged: root
+user.notprivileged: nobody
+
+vim /etc/sockd.conf
+client pass {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: error connect disconnect
+}
+client block {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: connect error
+}
+socks pass {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: error connect disconnect
+}
+socks block {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: connect error
+}
+```
+
+Where, ip addr show eth0:
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 06:72:6b:5d:09:dd brd ff:ff:ff:ff:ff:ff
+    inet 172.31.47.36/20 brd 172.31.47.255 scope global dynamic eth0
+       valid_lft 3451sec preferred_lft 3451sec
+    inet6 fe80::472:6bff:fe5d:9dd/64 scope link 
+       valid_lft forever preferred_lft forever
+
+# the system service file for the SOCKS5 proxy server is not installed so let’s create a new one:
+
+Vim /etc/systemd/system/sockd.service
+
+```
+[Unit]
+Description=SOCKS5 Proxy Server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/sbin/sockd -D
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+# save the file and run the following commands to reload the system configuration and start the SOCKS5 proxy server:
+
+systemctl daemon-reload
+systemctl start sockd.service
+systemctl enable sockd.service
+
+# This should start the SOCKS5 proxy and enable it to start automatically on boot.
+
+# Now check the status of the sockd service to ensure the Proxy Server has been started:
+systemctl status sockd
