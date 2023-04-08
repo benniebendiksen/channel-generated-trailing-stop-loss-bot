@@ -21,6 +21,11 @@ import time
 import sys
 import os
 
+socks5_proxy = "18.183.166.247:1080"
+socks5_user = None
+socks5_pass = None
+socks5_ssl_verification = True
+
 
 class TrailingStopLossActivation(BaseClass):
     logging.basicConfig(level=logging.DEBUG,
@@ -45,12 +50,19 @@ class TrailingStopLossActivation(BaseClass):
                 self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
             # initialize client object for api calls to server for data
             # self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET)
+            self.client = Client(exchange="binance.com",
+                                 socks5_proxy_server=socks5_proxy,
+                                 socks5_proxy_user=socks5_user,
+                                 socks5_proxy_pass=socks5_pass,
+                                 socks5_proxy_ssl_verification=socks5_ssl_verification)
+            klines_1m = self.client.futures_aggregate_trades(symbol="BTCUSDT", limit=1000)
+            print(klines_1m)
             self.stdout(f"Starting Unicorn Binance Websocket Manager ...")
-            self.ubwa_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
-            self.ubwa_manager.create_stream("aggTrade", self.config.MARKETS, output="UnicornFy")
-            self.indicators = Indicators(self, self.config, self.Coinpairs_dict.values(), self.event_loop)
-            self.event_loop.create_task(self.process_stream_data_from_stream_buffer(self.ubwa_manager))
-            self.event_loop.run_until_complete(self.main_loop())
+            # self.ubwa_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
+            # self.ubwa_manager.create_stream("aggTrade", self.config.MARKETS, output="UnicornFy")
+            # self.indicators = Indicators(self, self.config, self.Coinpairs_dict.values(), self.event_loop)
+            # self.event_loop.create_task(self.process_stream_data_from_stream_buffer(self.ubwa_manager))
+            # self.event_loop.run_until_complete(self.main_loop())
         except KeyboardInterrupt:
             self.exit_all(exit_code=0)
         except Exception as e:

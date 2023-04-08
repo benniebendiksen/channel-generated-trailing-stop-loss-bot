@@ -12,8 +12,8 @@ from datetime import datetime
 # print(futures_klines(symbol='BTCUSDT', limit=100, interval= '1m'))
 
 def get_future_aggregate(**params):
-    API_KEY="QjK5Z0MyX74ykrdEAPoWwJvzcdo0g2eIS7gfSqyISlj5HHjsUmRXctkcfROJeiv3"
-    API_SECRET="EzYEiocX5ERenyqCb8qf9PrgU1ew9X4MqXut8ZdHuuCJJh65seLYmo96p94bPbIf"
+    API_KEY="blah"
+    API_SECRET="blurb"
     client = Client(api_key=API_KEY, api_secret=API_SECRET)
     #res = client.get_exchange_info()
     #print(client.response.headers)
