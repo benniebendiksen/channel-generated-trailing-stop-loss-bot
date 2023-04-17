@@ -49,14 +49,16 @@ class TrailingStopLossActivation(BaseClass):
             if self.config.API_KEY is None or self.config.API_SECRET is None:
                 self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
             # initialize client object for api calls to server for data
-            # self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET)
-            self.client = Client(exchange="binance.com",
+            self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET,
+                                 exchange="binance.com-futures",
                                  socks5_proxy_server=socks5_proxy,
                                  socks5_proxy_user=socks5_user,
                                  socks5_proxy_pass=socks5_pass,
                                  socks5_proxy_ssl_verification=socks5_ssl_verification)
-            klines_1m = self.client.futures_aggregate_trades(symbol="BTCUSDT", limit=1000)
-            print(klines_1m)
+            # klines_1m = self.client.futures_aggregate_trades(symbol="BTCUSDT", limit=1000)
+            print(self.client.futures_account_balance())
+            print(self.client.get_account())
+            # self.client.create_order(symbol='ETHUSDT', side="BUY", quantity=2, stopPrice='2000', type='STOP_LOSS')
             self.stdout(f"Starting Unicorn Binance Websocket Manager ...")
             # self.ubwa_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
             # self.ubwa_manager.create_stream("aggTrade", self.config.MARKETS, output="UnicornFy")

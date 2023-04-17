@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="asyn conversion for multiple asset updates and indicator calculations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aws_remote_access/RemoteGetFutureDataWithSpecificInterval_In_Seconds.py" beforeDir="false" afterPath="$PROJECT_DIR$/aws_remote_access/RemoteGetFutureDataWithSpecificInterval_In_Seconds.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +168,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680032452698</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="asyn conversion for multiple asset updates and indicator calculations">
+      <created>1680916713158</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680916713159</updated>
+    </task>
+    <task id="LOCAL-00008" summary="asyn conversion for multiple asset updates and indicator calculations">
+      <created>1680916831861</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1680916831861</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
