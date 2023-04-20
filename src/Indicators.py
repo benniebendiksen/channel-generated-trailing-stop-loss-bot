@@ -1,5 +1,4 @@
 from src.BaseClass import BaseClass
-from src.SSHClientSingleton import SSHClientSingleton
 from src.Config import Config
 from datetime import datetime
 import pandas as pd
@@ -17,7 +16,7 @@ class Indicators(BaseClass):
     Continually compute values for indicators using aforementioned dataframe.
     """
 
-    def __init__(self, tsla, config, Coinpairs, loop):
+    def __init__(self, tsla, config, client, Coinpairs, loop):
         self.tsla = tsla
         self.config = config
         self.event_loop = loop
@@ -28,14 +27,13 @@ class Indicators(BaseClass):
         self.Coinpairs = Coinpairs
         self.dict_macd_values = {}
         self.dict_rsi_values = {}
-        self.ssh_singleton = SSHClientSingleton(config)
+        self.client = client
         self.macd = self.MACD(self.tsla, self.config)
         self.event_loop.create_task(self.schedule_candlestick_df_update())
 
     def fetch_and_make_kline_df(self, coinpair_instance):
         try:
-            df_prices = self.ssh_singleton.fetch_klines_remotely(self.ssh_singleton.ssh_client,
-                                                                 coinpair_instance.name.split("@")[0])
+            df_prices = self.client.fetch_klines_remotely(coinpair_instance.name.split("@")[0])
             df_prices.iloc[:, 0] = df_prices.iloc[:, 0].apply(lambda x: datetime.utcfromtimestamp(
                 (int(x) + 1) / 1e3))  # provide one millisecond and break down into fractions of a second
             df_prices.iloc[:, 1] = df_prices.iloc[:, 1].apply(lambda x: float(x))

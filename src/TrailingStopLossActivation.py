@@ -9,9 +9,6 @@ from src.CoinPair import CoinPair
 from unicorn_binance_websocket_api.manager import BinanceWebSocketApiManager
 from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
 from datetime import datetime
-import paramiko
-from paramiko import SSHClient
-from paramiko import AutoAddPolicy
 import pandas as pd
 import numpy as np
 import json
@@ -62,7 +59,8 @@ class TrailingStopLossActivation(BaseClass):
             self.stdout(f"Starting Unicorn Binance Websocket Manager ...")
             # self.ubwa_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
             # self.ubwa_manager.create_stream("aggTrade", self.config.MARKETS, output="UnicornFy")
-            # self.indicators = Indicators(self, self.config, self.Coinpairs_dict.values(), self.event_loop)
+            # self.indicators = Indicators(self, self.config, self.client, self.Coinpairs_dict.values(),
+            # self.event_loop)
             # self.event_loop.create_task(self.process_stream_data_from_stream_buffer(self.ubwa_manager))
             # self.event_loop.run_until_complete(self.main_loop())
         except KeyboardInterrupt:

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="asyn conversion for multiple asset updates and indicator calculations">
+    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="futures account verified working with socks5 proxy server">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Indicators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680916831861</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="futures account verified working with socks5 proxy server">
+      <created>1681701795668</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681701795669</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +211,7 @@
     <MESSAGE value="begin three indicator backtesting python" />
     <MESSAGE value="test paramiko use for multiple coinpairs" />
     <MESSAGE value="asyn conversion for multiple asset updates and indicator calculations" />
-    <option name="LAST_COMMIT_MESSAGE" value="asyn conversion for multiple asset updates and indicator calculations" />
+    <MESSAGE value="futures account verified working with socks5 proxy server" />
+    <option name="LAST_COMMIT_MESSAGE" value="futures account verified working with socks5 proxy server" />
   </component>
 </project>
