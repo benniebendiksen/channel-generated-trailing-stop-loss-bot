@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="futures account verified working with socks5 proxy server">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Indicators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681701795669</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="futures account verified working with socks5 proxy server">
+      <created>1681952443527</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681952443528</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
