@@ -1,0 +1,49 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © jack_forsterton10
+
+//@version=5
+strategy("Our MACD Backtesting", overlay=true)
+// macd params (3,5,3) for minute candlesticks 
+fastLength = input(18)
+slowlength = input(30)
+macdLength = input(18)
+macdLine = ta.ema(close, fastLength) - ta.ema(close, slowlength)
+signalLine = ta.ema(macdLine, macdLength)
+delta = macdLine - signalLine
+if (ta.crossover(delta, 0))
+	strategy.entry("MacdLE", strategy.long, comment="MacdLE")
+if (ta.crossunder(delta, 0))
+	strategy.entry("MacdSE", strategy.short, comment="MacdSE")
+//plot(strategy.equity, title="equity", color=color.red, linewidth=2, style=plot.style_areabr)
+
+
+close_values = [] #list to hold close values indexed at timestamp
+close_values.Index = type(datetime.timestamp) #convert index from int to type timestamp
+candlestick_length = 10s
+lookback_period = 2hr
+lookback_period_start = get_starting_timestamp_of_lookback_period
+make_candlesticks_from_requests(candlestick_length, lookback_period_start, close_value)
+    candle_start_timestamp = lookback_period_start
+    candle_stop_timestamp = candle_start_timestamp + candlestick_length
+    returned_response_array = get_agg_trade(start_time=initial_timestamp, limit=1000) # the aggTrade api call to binance
+
+    #base case for terminating recursive stack
+    if len(returned_response_array) < 1000: #i.e., the last returned response array
+        for elem in returned_response_array[1:]:
+            if elem['timestamp'] > candle_stop_timestamp
+                close_values.append(index=candle_start_timestamp, elem['price'] )
+                candle_start_timestamp = candle_stop_timestamp
+                candle_stop_timestamp = candle_start_timestamp + candlestick_length
+        close_values.append(index=candle_start_timestamp, returned_response_array[-1]['price'] )
+        return close_values
+
+    # recursive step
+    # process response array to grab timestamp at beginning of every ten seconds and price at end of every ten seconds
+    else:
+        for elem in returned_response_array[1:]:
+            if elem['timestamp'] > candle_stop_timestamp
+                close_values.append(index=candle_start_timestamp, elem['price'] )
+                candle_start_timestamp = candle_stop_timestamp
+                candle_stop_timestamp = candle_start_timestamp + candlestick_length
+        #once done processing the 1000 elems, make recursive call for next 1000 elems (possibly less for the final call)
+        make_candlesticks_from_requests(candlestick_length, candle_start_timestamp, close_values)

@@ -1,0 +1,42 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © jack_forsterton10
+
+//@version=5
+strategy("temp_rsi", overlay=true, margin_long=100, margin_short=100)
+
+higherTF1 = input.timeframe('15' , "Resolution", options = ['5', '15', '1H', 'D', 'W', 'M'])
+dailyopen = request.security(syminfo.tickerid, higherTF1, close)
+
+Reward = input(1600)
+Risk = input(1600)
+
+//length = input( 5 )
+length = input( 14 )
+//overSold = input( 30 )
+//overBought = input( 70 )
+EMA = input(200)
+price = close
+
+vrsi = ta.rsi(price, length)
+f_print(_text) =>
+    // Create label on the first bar.
+    var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left)
+    // On next bars, update the label's x and y position, and the text it displays.
+    label.set_xy(_label, bar_index, ta.highest(10)[1])
+    label.set_text(_label, _text)
+
+f_print(str.tostring(vrsi))
+if barstate.islast
+    label.new(x=bar_index, y=high, color=color.black,
+         textcolor=color.white, text=str.tostring(vrsi))
+
+
+
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © jack_forsterton10
+
+//@version=5
+strategy("candle_closes", overlay=true)
+
+
+label.new(x=bar_index, y=high, color=color.black,textcolor=color.white, text=str.tostring(close))
