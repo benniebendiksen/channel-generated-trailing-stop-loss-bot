@@ -24,7 +24,9 @@ Alternatively, open up a command line interface and from the root directory of t
 ```
 conda env create -f environment.yml
 ```
-This will attempt to create the conda environment for you with the correct specifications. Then run:
+NOTE: This approach may lead to a ResolvePackageNotFound error depending on your machine specifications.
+
+This will attempt to create the conda environment for you with the correct dependencies and versions installed. Then run:
 ```
 conda activate trend_activated_bot_env
 ```
@@ -42,5 +44,3 @@ You are able to now run the project! From the root directory of the project run:
 ```
 python trend_activated_app/main.py
 ```
-
-![ide_stream.png](ide_stream.png)
