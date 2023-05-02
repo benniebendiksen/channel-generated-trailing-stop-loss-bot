@@ -2,36 +2,45 @@
 A Technical Analysis employing test of the Unicorn Binance Trailing Stop Loss Engine within Binance's Futures Exchange
 
 ## Installation
-Having Anaconda (or Miniconda) installed allows for easy virtual environment management creation and replication. Alternatively, non-native libraries relied upon by this project will be provided in the form of requirements.txt and setup.py files, respectively.
+To facilitate the installation of dependencies, in an OS agnostic way, non-native libraries relied upon by this project will be provided in the form of requirements.txt and setup.py files, respectively. Once completed, this project will be uploaded to PyPI (Python Package Index).
+
+### Virtual Environment Creation
+cd into the root directory and create/load a Python virtual environment:
+```
+$ cd trend-activated-trailing-stop-loss-bot
+$ python3 -m venv tslb_env
+$ source tslb_env/bin/activate
+```
+Having created this venv without an environment,yml file, you will need to install the non-native libraries relied upon by this project, found within the requirements.txt or setup.py files:
+```
+$ cd ..
+$ python3 -m pip install -r requirements.txt 
+or
+$ python3 setup.py install
+```
 
 ### Conda Environment Creation
-Open up a command line interface and from the root directory of the project run:
+Alternatively, open up a command line interface and from the root directory of the project run:
 ```
 conda env create -f environment.yml
 ```
-This will create the conda environment for you to the correct specifications. Then run:
+This will attempt to create the conda environment for you with the correct specifications. Then run:
 ```
 conda activate trend_activated_bot_env
 ```
-This will activate the conda environment for you. Now run:
-```
-poetry build
-```
-to build the project. Now you can spin up the remote server by running:
-```
-python ws_consumer/src/server.py
-```
-You are able to now run the project! Either open up another command line interface and, from the root directory of the project run:
-```
-python trend_activated_app/main.py
-```
-to stream data to your local machine. You can also use your favorite IDE, such as PyCharm, by setting its project Python Interpreter to the created trend_activated_bot_env Conda environment.
-
-![ide_stream.png](ide_stream.png)
+This will activate the conda environment for you. 
 
 ## Execute
+Ensure your Binance Futures-enabled API KEYS are set as OS environment variables.
 ```
 $ export API_KEY="aaa"
 $ export API_SECRET="bbb"
 $ ./main.py
 ```
+
+You are able to now run the project! From the root directory of the project run:
+```
+python trend_activated_app/main.py
+```
+
+![ide_stream.png](ide_stream.png)
