@@ -34,13 +34,9 @@ This will activate the conda environment for you.
 
 ## Execute
 Ensure your Binance Futures-enabled API KEYS are set as OS environment variables.
+You are able to now run the project!
 ```
 $ export API_KEY="aaa"
 $ export API_SECRET="bbb"
 $ ./main.py
-```
-
-You are able to now run the project! From the root directory of the project run:
-```
-python trend_activated_app/main.py
 ```
