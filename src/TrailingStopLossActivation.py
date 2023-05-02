@@ -6,12 +6,12 @@ from src.BaseClass import BaseClass
 from src.Config import Config
 from src.Indicators import Indicators
 from src.CoinPair import CoinPair
+from src.Strategy import Strategy
 from unicorn_binance_websocket_api.manager import BinanceWebSocketApiManager
 from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
 from datetime import datetime
 import pandas as pd
 import numpy as np
-import requests
 import json
 import asyncio
 import logging
@@ -19,8 +19,7 @@ import time
 import sys
 import os
 
-# socks5_proxy = "18.183.166.247:1080"
-socks5_proxy = "54.249.188.136:1080"
+socks5_proxy = None
 socks5_user = None
 socks5_pass = None
 socks5_ssl_verification = True
@@ -35,9 +34,10 @@ class TrailingStopLossActivation(BaseClass):
     logging.getLogger("unicorn_binance_trailing_stop_loss")
 
     def __init__(self):
-        # try:
+        try:
             self.stdout(f"Starting new instance of trend-activated-bot ...")
             self.config = Config()
+            socks5_proxy = self.config.SOCKS5_IP_PORT
             self.stop_request = False
             self.engine = None
             self.ubwa_manager = None
@@ -56,13 +56,13 @@ class TrailingStopLossActivation(BaseClass):
                                  socks5_proxy_user=socks5_user,
                                  socks5_proxy_pass=socks5_pass,
                                  socks5_proxy_ssl_verification=socks5_ssl_verification)
-            klines_1m = self.client.futures_coin_klines(symbol="BTCUSDT", interval="1m", limit=1500)
+            self.strategy = Strategy(self.client)
+            klines_1m = self.client.futures_klines(symbol="BTCUSDT", interval="1m", limit=1500)
+            print(self.strategy.create_df(klines_1m))
+            # IP weight limit is 1200/min. klines limit 1000 = 5 weight, limit 1500 = 10
+            print(self.client.response.headers['X-MBX-USED-WEIGHT-1M'])
             # # print(self.client.futures_account_balance())
-            resp = requests.get(BASE_URL + '/fapi/v1/exchangeInfo')
-            json_response = json.loads(resp.content)
-            print(json_response)
-            # print(self.client.get_exchange_info())
-            # print(self.client.get_account())
+            # print(self.client.futures_exchange_info()['rateLimits'])
             # self.client.create_order(symbol='ETHUSDT', side="BUY", quantity=2, stopPrice='2000', type='STOP_LOSS')
             self.stdout(f"Starting Unicorn Binance Websocket Manager ...")
             # self.ubwa_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
@@ -71,12 +71,12 @@ class TrailingStopLossActivation(BaseClass):
             # self.event_loop)
             # self.event_loop.create_task(self.process_stream_data_from_stream_buffer(self.ubwa_manager))
             self.event_loop.run_until_complete(self.main_loop())
-        # except KeyboardInterrupt:
-        #     self.exit_all(exit_code=0)
-        # except Exception as e:
-        #     self.stdout(f"Unknown Error in TrailingStopLossActivation Constructor - {e}", "CRITICAL",
-        #                 print_enabled=True)
-        #     self.exit_all(exit_code=0)
+        except KeyboardInterrupt:
+            self.exit_all(exit_code=0)
+        except Exception as e:
+            self.stdout(f"Unknown Error in TrailingStopLossActivation Constructor - {e}", "CRITICAL",
+                        print_enabled=True)
+            self.exit_all(exit_code=0)
 
     async def main_loop(self):
         sleep_counter = 0

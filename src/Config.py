@@ -11,6 +11,7 @@ class Config(BaseClass):
 
     API_KEY = os.environ.get('API_KEY')
     API_SECRET = os.environ.get('API_SECRET')
+    SOCKS5_IP_PORT = os.environ.get('SOCKS5_IP_PORT')
     REMOTE_KEYS_PATH = "/Users/bendiksen/Desktop/trend-activated-trailing-stop-loss-bot/MY_AWS_KEYS.pem"
     REMOTE_ADDRESS = "18.183.102.61"
     AGGTRADE_FILENAME = "df_aggTrade_returned.json"
