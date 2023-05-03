@@ -56,11 +56,12 @@ class TrailingStopLossActivation(BaseClass):
                                  socks5_proxy_user=socks5_user,
                                  socks5_proxy_pass=socks5_pass,
                                  socks5_proxy_ssl_verification=socks5_ssl_verification)
+            self.stdout(f"Client Initialized ...")
             self.strategy = Strategy(self.client)
-            klines_1m = self.client.futures_klines(symbol="BTCUSDT", interval="1m", limit=1500)
-            print(self.strategy.create_df(klines_1m))
+            # klines_1m = self.client.futures_klines(symbol="ADAUSDT", interval="1m", limit=500)
+            self.strategy.calculate_initial_wick_lines()
             # IP weight limit is 1200/min. klines limit 1000 = 5 weight, limit 1500 = 10
-            print(self.client.response.headers['X-MBX-USED-WEIGHT-1M'])
+            # print(self.client.response.headers['X-MBX-USED-WEIGHT-1M'])
             # # print(self.client.futures_account_balance())
             # print(self.client.futures_exchange_info()['rateLimits'])
             # self.client.create_order(symbol='ETHUSDT', side="BUY", quantity=2, stopPrice='2000', type='STOP_LOSS')
