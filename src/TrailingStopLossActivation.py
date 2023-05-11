@@ -7,7 +7,7 @@ from src.Config import Config
 from src.Indicators import Indicators
 from src.CoinPair import CoinPair
 from src.Strategy import Strategy
-from unicorn_binance_websocket_api.manager import BinanceWebSocketApiManager
+import src.printCandleBacktesting_BF3 as Backtest
 from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
 from datetime import datetime
 import pandas as pd
@@ -57,14 +57,11 @@ class TrailingStopLossActivation(BaseClass):
                                  socks5_proxy_pass=socks5_pass,
                                  socks5_proxy_ssl_verification=socks5_ssl_verification)
             self.stdout(f"Client Initialized ...")
-            self.strategy = Strategy(self.client)
-            # klines_1m = self.client.futures_klines(symbol="ADAUSDT", interval="1m", limit=500)
-            self.strategy.calculate_initial_wick_lines()
+            Backtest.run_algorithm(client=self.client, symbol="DOGEUSDT", start_stamp="2023-05-06 10:00:00",
+                                   end_stamp="2023-05-06 20:00:00")
+            # self.strategy = Strategy(self.client)
+            # self.strategy.calculate_initial_wick_lines()
             # IP weight limit is 1200/min. klines limit 1000 = 5 weight, limit 1500 = 10
-            # print(self.client.response.headers['X-MBX-USED-WEIGHT-1M'])
-            # # print(self.client.futures_account_balance())
-            # print(self.client.futures_exchange_info()['rateLimits'])
-            # self.client.create_order(symbol='ETHUSDT', side="BUY", quantity=2, stopPrice='2000', type='STOP_LOSS')
             self.stdout(f"Starting Unicorn Binance Websocket Manager ...")
             # self.ubwa_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
             # self.ubwa_manager.create_stream("aggTrade", self.markets, output="UnicornFy")

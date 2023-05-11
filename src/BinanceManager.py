@@ -35,6 +35,10 @@ class BinanceManager:
         self.balances = []
         self.addresses = {}
         self.markets = baseclass.config.markets  # Set the markets attribute using the config object
+        # print(self.client.response.headers['X-MBX-USED-WEIGHT-1M'])
+        # # print(self.client.futures_account_balance())
+        # print(self.client.futures_exchange_info()['rateLimits'])
+        # self.client.create_order(symbol='ETHUSDT', side="BUY", quantity=2, stopPrice='2000', type='STOP_LOSS')
 
     def get_coin_list(self):
         coin_list = set()
