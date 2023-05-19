@@ -132,3 +132,28 @@ def segment_intersect(line1, line2):  # A,B -> line1, C,D-> line2
     # return ccw(A,C,D) != ccw(B,C,D) and ccw(A,B,C) != ccw(A,B,D)
     return ccw(line1[0], line2[0], line2[1]) != ccw(line1[1], line2[0], line2[1])\
        and ccw(line1[0], line1[1], line2[0]) != ccw(line1[0], line1[1], line2[1])
+
+
+def findEdgeOfTargetCandleStickForLine1(df: pd.DataFrame, check_trend: str, targetCandleIndex: int) -> list:
+    # Edge = None
+    if check_trend == "UP":  # use bottom line
+        py1 = df[3][targetCandleIndex]  # set y to the lowest
+        # when py1 is using the lowest value
+        if df[1][targetCandleIndex] > df[4][targetCandleIndex]:  # red candle
+            # if it is red candle, we use close for limit1
+            Edge = df[4][targetCandleIndex]
+        else:  # green candle
+            # if it is green candle, we use open for limit1
+            Edge = df[1][targetCandleIndex]
+    # elif check_trend == "DOWN":  # use top line
+    else:  # trend is Down, use top line
+        py1 = df[2][targetCandleIndex]  # set y to the highest
+        # when py1 is using the highest value
+        if df[1][targetCandleIndex] > df[4][targetCandleIndex]:  # red candle
+            # if it is red candle, we use open for limit1
+            Edge = df[1][targetCandleIndex]
+        else:  # green candle
+            # if it is green candle, we use close for limit1
+            Edge = df[4][targetCandleIndex]
+
+    return [py1, Edge]
