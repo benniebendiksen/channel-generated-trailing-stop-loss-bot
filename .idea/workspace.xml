@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="futures account verified working with socks5 proxy server">
-      <change afterPath="$PROJECT_DIR$/src/helper001.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/printCandleBacktesting_BF3.py" afterDir="false" />
+    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="push updated strategy file, and its use by main class">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/trend-activated-trailing-stop-loss-bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trend-activated-trailing-stop-loss-bot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinanceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/BinanceManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681952474706</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="push updated strategy file, and its use by main class">
+      <created>1683767579772</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1683767579773</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -285,6 +289,7 @@
     <MESSAGE value="test paramiko use for multiple coinpairs" />
     <MESSAGE value="asyn conversion for multiple asset updates and indicator calculations" />
     <MESSAGE value="futures account verified working with socks5 proxy server" />
-    <option name="LAST_COMMIT_MESSAGE" value="futures account verified working with socks5 proxy server" />
+    <MESSAGE value="push updated strategy file, and its use by main class" />
+    <option name="LAST_COMMIT_MESSAGE" value="push updated strategy file, and its use by main class" />
   </component>
 </project>
