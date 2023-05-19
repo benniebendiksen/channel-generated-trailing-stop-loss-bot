@@ -7,7 +7,7 @@ from src.Config import Config
 from src.Indicators import Indicators
 from src.CoinPair import CoinPair
 from src.Strategy import Strategy
-import src.printCandleBacktesting_BF3 as Backtest
+import src.printCandleBacktesting_BF7_may18 as Backtest
 from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
 from datetime import datetime
 import pandas as pd
