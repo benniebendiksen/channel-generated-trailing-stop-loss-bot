@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="push updated strategy file, and its use by main class">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/trend-activated-trailing-stop-loss-bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trend-activated-trailing-stop-loss-bot.iml" afterDir="false" />
+    <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="update requirements.txt, run first version of strategy algorithm in a loop, store results images in pptx file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683767579773</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="update requirements.txt, run first version of strategy algorithm in a loop, store results in ppt file">
+      <created>1684535705255</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1684535705256</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -290,6 +294,7 @@
     <MESSAGE value="asyn conversion for multiple asset updates and indicator calculations" />
     <MESSAGE value="futures account verified working with socks5 proxy server" />
     <MESSAGE value="push updated strategy file, and its use by main class" />
-    <option name="LAST_COMMIT_MESSAGE" value="push updated strategy file, and its use by main class" />
+    <MESSAGE value="update requirements.txt, run first version of strategy algorithm in a loop, store results in ppt file" />
+    <option name="LAST_COMMIT_MESSAGE" value="update requirements.txt, run first version of strategy algorithm in a loop, store results in ppt file" />
   </component>
 </project>
