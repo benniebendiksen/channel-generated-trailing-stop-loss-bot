@@ -22,7 +22,7 @@ cd dante-1.4.2
 make
 make install
 
-# now lets verify the Dante isntallation by checking its version:
+# now lets verify the Dante installation by checking its version:
 sockd -v
 
 #Copy the sockd.conf file over to the appropriate location for the Dante SOCKS5 server installation:
@@ -30,15 +30,34 @@ sockd -v
 #You can search for the directory with: <find / -type d -name "dante-1.4.2" 2>/dev/null> but make sure to specify the correct version.
 cp /root/dante-1.4.2/example/sockd.conf /etc/sockd.conf	
 
-#Edit the sockd.comf file; to find the IP address of the eth0 interface please run:
- ip add show eth0:
+#To find the interface of your EC2 instance, run:
+ip addr show
+#Under 2: you will find your network, e.g., 2: enX0, or 2: eth0, etc.
 
+# Now find the IP address of the interface found above (e.g., eth0), please run:
+ip add show <network>
+
+Where, ip addr show enX0:
+2: enX0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc fq_codel state UP group default qlen 1000
+    link/ether 06:35:19:b1:c5:61 brd ff:ff:ff:ff:ff:ff
+    altname eni-0c4bceabc4d1a2b80
+    altname device-number-0.0
+    inet 172.31.43.207/20 metric 512 brd 172.31.47.255 scope global dynamic enX0
+       valid_lft 3011sec preferred_lft 3011sec
+    inet6 fe80::435:19ff:feb1:c561/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+
+#Extract the ip address, e.g., 172.31.43.207
+
+#Then, open up the sockd.conf file found under the dante example directory:
 vim /etc/sockd.conf
+
+#And copy paste the following minimal working example, ensuring to replace the value under "external" with your extracted ip address:
 
 ```
 logoutput: stderr
 internal: 0.0.0.0 port = 1080
-external: 172.31.47.36
+external: 172.31.43.207
 clientmethod: none
 socksmethod: none
 user.privileged: root
@@ -63,17 +82,30 @@ socks block {
 }
 ```
 
-Where, ip addr show eth0:
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc pfifo_fast state UP group default qlen 1000
-    link/ether 06:72:6b:5d:09:dd brd ff:ff:ff:ff:ff:ff
-    inet 172.31.47.36/20 brd 172.31.47.255 scope global dynamic eth0
-       valid_lft 3451sec preferred_lft 3451sec
-    inet6 fe80::472:6bff:fe5d:9dd/64 scope link 
-       valid_lft forever preferred_lft forever
+# Open Port 1080 in AWS Security Group
+1) Go to AWS EC2 Console → Instances.
+2) Find your instance and click on it.
+3) Under Security, find the Security Group attached to your instance.
+ Click Edit inbound rules and add a new rule:
+ 
+     Type: Custom TCP
+     Port Range: 1080
+     Source: 0.0.0.0/0 (for open access) or your specific IP for restricted access.
+
+#Explicitly allow outbound TCP traffic on port 443, following these steps:
+
+Go to AWS Console → EC2 → Security Groups → Select your instance's Security Group (SG) → Outbound rules:
+add this rule:
+
+    Type: HTTPS
+    Protocol: TCP
+    Port Range: 443
+    Destination: 0.0.0.0/0 (or restrict to specific IPs if needed)
+
+
 
 # the system service file for the SOCKS5 proxy server is not installed so let’s create a new one:
-
-Vim /etc/systemd/system/sockd.service
+vim /etc/systemd/system/sockd.service
 
 ```
 [Unit]
@@ -98,3 +130,25 @@ systemctl enable sockd.service
 
 # Now check the status of the sockd service to ensure the Proxy Server has been started:
 systemctl status sockd
+
+#Note: to stop the service run: systemctl stop sockd.service
+
+#Go ahead and grab your instance IP address (this changes every time you stop and start your instance unless you enable elastic ip address):
+curl http://checkip.amazonaws.com
+
+#Here are commands to test your SOCKS5 proxy both internally and externally to ensure it works as expected
+#Run these on your EC2 instance (proxy server):
+#1) Check if SOCKS5 is Listening on Port 1080:
+sudo netstat -tulnp | grep 1080
+#Expected Output: tcp        0      0 0.0.0.0:1080            0.0.0.0:*               LISTEN      8814/sockd  
+#2) Verify Proxy is Accepting Connections
+curl -v --proxy socks5h://127.0.0.1:1080 https://ifconfig.me
+#Expecyed Output: Connected to 127.0.0.1 (127.0.0.1) port 1080 plus more text
+#3) Test Proxy from external device
+curl -v --proxy socks5h://<YOUR_PUBLIC_IP_ADDRESS>:1080 https://ifconfig.me
+# Expected output
+*   Trying 57.180.240.179:1080...
+* SOCKS5 connect to ifconfig.me:443 (remotely resolved)
+* SOCKS5 request granted.
+* Connected to 57.180.240.179 (57.180.240.179) port 1080 (#0)
+
