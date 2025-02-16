@@ -9,6 +9,7 @@ from src.CoinPair import CoinPair
 from src.Strategy import Strategy
 import src.printCandleBacktesting_BF7_may18 as Backtest
 from unicorn_binance_rest_api.manager import BinanceRestApiManager as Client
+from unicorn_binance_websocket_api.manager import BinanceWebSocketApiManager
 from datetime import datetime
 import pandas as pd
 import numpy as np
@@ -50,24 +51,24 @@ class TrailingStopLossActivation(BaseClass):
             if self.config.API_KEY is None or self.config.API_SECRET is None:
                 self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
             # initialize client object for api calls to server for data
-            self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET,
-                                 exchange="binance.com-futures",
-                                 socks5_proxy_server=socks5_proxy,
-                                 socks5_proxy_user=socks5_user,
-                                 socks5_proxy_pass=socks5_pass,
-                                 socks5_proxy_ssl_verification=socks5_ssl_verification)
+            # self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET,
+            #                      exchange="binance.com-futures",
+            #                      socks5_proxy_server=socks5_proxy,
+            #                      socks5_proxy_user=socks5_user,
+            #                      socks5_proxy_pass=socks5_pass,
+            #                      socks5_proxy_ssl_verification=socks5_ssl_verification)
             self.stdout(f"Client Initialized ...")
-            Backtest.run_algorithm(client=self.client, symbol="DOGEUSDT", start_stamp="2023-05-06 10:00:00",
-                                   end_stamp="2023-05-06 20:00:00")
+            # Backtest.run_algorithm(client=self.client, symbol="DOGEUSDT", start_stamp="2023-05-06 10:00:00",
+            #                        end_stamp="2023-05-06 20:00:00")
             # self.strategy = Strategy(self.client)
             # self.strategy.calculate_initial_wick_lines()
             # IP weight limit is 1200/min. klines limit 1000 = 5 weight, limit 1500 = 10
             self.stdout(f"Starting Unicorn Binance Websocket Manager ...")
-            # self.ubwa_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
-            # self.ubwa_manager.create_stream("aggTrade", self.markets, output="UnicornFy")
+            self.ubwa_manager = BinanceWebSocketApiManager(exchange="binance.com-futures")
+            self.ubwa_manager.create_stream("aggTrade", self.markets, output="UnicornFy")
             # self.indicators = Indicators(self, self.config, self.client, self.Coinpairs_dict.values(),
             # self.event_loop)
-            # self.event_loop.create_task(self.process_stream_data_from_stream_buffer(self.ubwa_manager))
+            self.event_loop.create_task(self.process_stream_data_from_stream_buffer(self.ubwa_manager))
             self.event_loop.run_until_complete(self.main_loop())
         except KeyboardInterrupt:
             self.exit_all(exit_code=0)
@@ -121,6 +122,7 @@ class TrailingStopLossActivation(BaseClass):
                 await asyncio.sleep(0.01)
             else:
                 try:
+                    print(f"data: {oldest_stream_data}")
                     Coinpair = self.Coinpairs_dict[oldest_stream_data.get("stream_type")]
                     self.indicators.perform_indicator_updates(oldest_stream_data, Coinpair)
                 except Exception as error:
