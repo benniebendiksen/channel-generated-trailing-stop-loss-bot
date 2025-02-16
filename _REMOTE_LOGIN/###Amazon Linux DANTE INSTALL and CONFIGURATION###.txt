@@ -1,4 +1,4 @@
-###Amazon Linux DANTE INSTALL and CONFIGURATION###
+###Instructions for setting up a SOCKS5 proxy server on your Amazon Linux OS (i.e., DANTE INSTALL and CONFIGURATION)###
 
 # Start by accessing root priviledge and running a system update
 sudo -i
