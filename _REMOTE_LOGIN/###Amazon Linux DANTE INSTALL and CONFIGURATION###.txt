@@ -22,7 +22,8 @@ cd dante-1.4.2
 make
 make install
 
-# now lets check the installed Dante version to verify our install sockd -v
+# now lets verify the Dante isntallation by checking its version:
+sockd -v
 
 #Copy the sockd.conf file over to the appropriate location for the Dante SOCKS5 server installation:
 cp /home/ec2-user/dante-1.4.2/example/sockd.conf /etc/sockd.conf	
