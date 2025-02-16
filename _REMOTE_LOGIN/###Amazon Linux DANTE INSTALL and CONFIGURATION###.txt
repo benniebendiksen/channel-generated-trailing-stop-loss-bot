@@ -26,7 +26,9 @@ make install
 sockd -v
 
 #Copy the sockd.conf file over to the appropriate location for the Dante SOCKS5 server installation:
-cp /home/ec2-user/dante-1.4.2/example/sockd.conf /etc/sockd.conf	
+#Note: your dante instal may be located under a different directory, e.g., /home/ec2-user/dante-1.4.2. 
+#You can search for the directory with: <find / -type d -name "dante-1.4.2" 2>/dev/null> but make sure to specify the correct version.
+cp /root/dante-1.4.2/example/sockd.conf /etc/sockd.conf	
 
 #Edit the sockd.comf file; to find the IP address of the eth0 interface please run:
  ip add show eth0:
