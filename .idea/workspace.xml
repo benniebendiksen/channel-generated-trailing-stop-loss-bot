@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9f3631c-bed0-446c-8ceb-737fe08400e9" name="Changes" comment="update requirements.txt, run first version of strategy algorithm in a loop, store results images in pptx file">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrailingStopLossActivation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +201,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1676235005325</updated>
-      <workItem from="1739663474139" duration="466000" />
+      <workItem from="1739663474139" duration="717000" />
     </task>
     <task id="LOCAL-00001" summary="extend remote dataframe fetching to use optional keyword args">
       <created>1678586635862</created>
