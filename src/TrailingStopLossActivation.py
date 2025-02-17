@@ -1,7 +1,6 @@
 import math
 import threading
 
-from src.UnicornBinanceTrailingStopLossEngine import UnicornBinanceTrailingStopLossEngine
 from src.BaseClass import BaseClass
 from src.Config import Config
 from src.Indicators import Indicators
@@ -24,7 +23,6 @@ socks5_proxy = None
 socks5_user = None
 socks5_pass = None
 socks5_ssl_verification = True
-BASE_URL = "https://fapi.binance.com"
 
 
 class TrailingStopLossActivation(BaseClass):
@@ -51,15 +49,15 @@ class TrailingStopLossActivation(BaseClass):
             if self.config.API_KEY is None or self.config.API_SECRET is None:
                 self.exit_all(exit_code=0, exit_msg="Please provide API_KEY and API_SECRET")
             # initialize client object for api calls to server for data
-            # self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET,
-            #                      exchange="binance.com-futures",
-            #                      socks5_proxy_server=socks5_proxy,
-            #                      socks5_proxy_user=socks5_user,
-            #                      socks5_proxy_pass=socks5_pass,
-            #                      socks5_proxy_ssl_verification=socks5_ssl_verification)
+            self.client = Client(api_key=self.config.API_KEY, api_secret=self.config.API_SECRET,
+                                 exchange="binance.com-futures",
+                                 socks5_proxy_server=socks5_proxy,
+                                 socks5_proxy_user=socks5_user,
+                                 socks5_proxy_pass=socks5_pass,
+                                 socks5_proxy_ssl_verification=socks5_ssl_verification)
             self.stdout(f"Client Initialized ...")
-            # Backtest.run_algorithm(client=self.client, symbol="DOGEUSDT", start_stamp="2023-05-06 10:00:00",
-            #                        end_stamp="2023-05-06 20:00:00")
+            Backtest.run_algorithm(client=self.client, symbol="DOGEUSDT", start_stamp="2023-05-06 10:00:00",
+                                   end_stamp="2023-05-06 20:00:00")
             # self.strategy = Strategy(self.client)
             # self.strategy.calculate_initial_wick_lines()
             # IP weight limit is 1200/min. klines limit 1000 = 5 weight, limit 1500 = 10

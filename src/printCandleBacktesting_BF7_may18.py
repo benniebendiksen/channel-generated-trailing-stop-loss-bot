@@ -696,6 +696,8 @@ def run_algorithm(client:Client, symbol:str, start_stamp:str, end_stamp:str, win
     klines_1m = client.futures_klines(symbol=symbol, interval="1m", startTime=st, endTime=et, limit=1000)
     array_response = np.array(klines_1m).tolist()
     df_prices = pd.DataFrame(klines_1m)
+    print(f"df_prices: {df_prices}")
+    assert False, "cuz"
 
     # TEST ONLY when client is not responding due to some issues
     # df_prices = pd.read_pickle("t1.txt")

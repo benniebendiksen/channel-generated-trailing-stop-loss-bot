@@ -1,11 +1,10 @@
-pandas==1.4.3
-unicorn-binance-websocket-api==1.46.0
-unicorn-binance-rest-api==1.9.0
-unicorn-binance-trailing-stop-loss==0.8.0
-numpy==1.22.1
+pandas
+unicorn-binance-websocket-api
+unicorn-binance-rest-api
+numpy
 plotly==5.14.1
 setuptools==65.5.1
-scipy==1.10.1
+scipy
 urllib3==1.26.11
 python-pptx==0.6.21
 kaleido==0.2.1
